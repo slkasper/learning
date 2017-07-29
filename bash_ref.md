@@ -1,10 +1,7 @@
 Bash Cheatsheat
 ===============
 
-we have some new information
-which we add here...
-yay new info!!!
-
+First introduction to bash commands.  List of useful info.
 
 ```sh
 
@@ -46,7 +43,8 @@ mkdr
 # present working directory
 pwd
 
-
-
+# change permissions
+chmod
 
 ```
+reference for file permissions [here](https://www.linux.com/learn/understanding-linux-file-permissions)
