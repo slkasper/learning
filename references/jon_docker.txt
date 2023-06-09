@@ -1,0 +1,29 @@
+# create my container
+# volume mount pg_data (creates if doesn't exist)
+# mount my current directory (looks like this...)
+# .
+# └── src
+#     ├── bar.txt
+#     └── foo.txt
+docker run --name foo -e POSTGRES_USER=jigsaw \
+-e POSTGRES_PASSWORD=secret \
+-v pg_data:/var/lib/postgresql/data \
+-v $PWD:/home/ \
+-p 8888:1234 \
+postgres
+
+# in another terminal session
+# tunnel onto the container shell
+docker exec -it foo sh
+
+# check the contents of the docker volume
+ls /var/lib/postgresql/data/
+
+# check that the bind-mount is as expected
+ls /home/src/
+
+# can we do a copy of our bind-mount to the volume? (yes)
+docker exec -it foo cp -r /home/src/ /var/lib/postgresql/foobar/
+
+# can we see the file contents outside of our image
+docker exec -it foo ls /var/lib/postgresql/
