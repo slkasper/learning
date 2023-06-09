@@ -157,5 +157,5 @@ Had to run though this to get it to work. Should see my token in the Keychain ac
 
 https://stackoverflow.com/questions/68775869/message-support-for-password-authentication-was-removed-please-use-a-personal
 
-my personal access token is : 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
-Find this txt file under Jigsaw called personal_access_token_github.txt
+my personal access token is found under
+under Jigsaw called personal_access_token_github_6-9-23.txt
