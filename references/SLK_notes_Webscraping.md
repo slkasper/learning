@@ -78,7 +78,7 @@ To run in python interactive:
 ```
 python -i console.py
 ```
-Both of these require you to quit between saves when you make changes, so it doesn't matter which you use, as long as you know which you're in. iPython exits with just `exit` and python -i exits with `exit()`.
+-i requires you to quit between saves when you make changes, but with ipython you only need to rerun the %run line. It doesn't matter which you use, as long as you know which you're in. iPython exits with just `exit` and python -i exits with `exit()`.
 
 ### Using Pytest
 
