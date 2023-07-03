@@ -169,3 +169,4 @@ which will be more verbose and harder to find the actual mount.
 
 Of course, the docker desktop is a great tool for all of this if you can use it!
 
+## This is all great, but needs to be updated with Dockerfile info
