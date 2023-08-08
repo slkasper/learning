@@ -131,7 +131,15 @@ The above section shows you how to move to different branches.  Once you want to
 git merge <new_branch_name>
 ```
 
+# Take a repo from Github and make changes to save to MY github
+Usually this is if you want to start from someone else's repo and do a project to save to your own repo.
 
+Here are the steps:
+1. From the other repo, hit Fork.  This will let you fork the repo to your personal account.
+2. Go back to your account now and copy the link from the Clone option so you can clone from the new repo you just created from YOUR account.
+3. Locally on your machine, in the terminal, starting from whatever folder you want, copy the clone link and clone away
+4. This cloned repo is connected to your github repo now, so no need to init!
+5. Make your changes, commits and then push with the origin Head command and you should be set.
 
 # Github
 I really don't want to rewrite his lab, so I'm pasting it here:
