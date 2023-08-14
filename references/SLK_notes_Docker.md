@@ -89,6 +89,11 @@ You can see a list of containers just like you see image list; with the ls comma
 ```
 docker container ls
 ```
+Here's an option I found from https://www.cloudbees.com/blog/docker-how-to-stop-and-remove-all-containers-at-once
+```
+docker ps -aq
+```
+The -aq option tells docker ps to list all containers (-a) by container ID (-q). You can combine the two arguments after a single dash (-).
 
 Every time we use the run command, a new container is created.  
 
@@ -112,7 +117,7 @@ you may need to find the name from `docker container ls` or from docker desktop.
  ```
  docker run -p host_port:container_port image_name
  ```
-
+## Stop current container
  Stop a container with either `ctr+c` or :
  ```
 docker stop <container_name>
@@ -124,6 +129,28 @@ docker container start <name_of_previously_closed_container>
 ```
 
 while the container is running, you should be able to work with it in a new terminal tab if you can't create commands because you have the container running in session. Otherwise you can create it with -d flag (daemon) and it will not run in the terminal (runs in the background).
+
+## Stop all running containers
+Sometimes you need to stop all containers. If you're running on a linux machine for example and can't use a docker desktop to see what's running and what's not.  Sometimes if you still have a container running, you may be calling an old image if you're not careful. A good way to clear out running containers is to stop them all then you can run a new fresh one without worry that your are calling an old out-dated image.
+
+This is a great resource:
+https://www.cloudbees.com/blog/docker-how-to-stop-and-remove-all-containers-at-once
+
+Using these instructions, start by seeing all containers by id:
+```
+docker ps -aq
+```
+
+Force stop all containers:
+```
+$ docker ps -aq | xargs docker stop | xargs docker rm
+```
+If you want more info on these commands, see the link above.
+
+If this still doesn't work (and it didn't for me when I was running in the AWS Workspace), there is a another 'less friendly' way but I think it's really a last resort thing. See the link above again if you want to read into why, but I had to do it and it worked, so use at your own peril.
+```
+$ docker ps -aq | xargs docker rm -f
+```
 
 ## Volume mount and Bind mount
 
