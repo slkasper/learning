@@ -149,7 +149,7 @@ git remote add origin git@github.com:JeffKatzy/albums_songs.git
 ( <---git remote add origin git@github.com:<user_name/repo_name.git> --)
 git push -u origin master
 ```
-Here's a really nice quick start:
+Here's a really nice quick start (from this link https://www.warp.dev/terminus/git-create-repository):
 ```
 $ cd my-project
 
