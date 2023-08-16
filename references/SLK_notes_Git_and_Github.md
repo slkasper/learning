@@ -149,6 +149,30 @@ git remote add origin git@github.com:JeffKatzy/albums_songs.git
 ( <---git remote add origin git@github.com:<user_name/repo_name.git> --)
 git push -u origin master
 ```
+Here's a really nice quick start:
+```
+$ cd my-project
+
+# initialise a git repository
+$ git init
+
+ # Add all files to be tracked
+ $ git add .
+
+ # commit tracked files with a message
+ $ git commit -m “some message”
+
+ # configure a remote repo - if you haven't already, go to github, create a new repo and get the remote url for this step
+ $ git remote add origin <remote_url>
+
+ # set up origin push to a remote repository
+ $ git push --set-upstream origin main
+
+# once that's set, you can now use this to push future changes to github
+ $ git push origin main
+
+```
+
 # Take a repo from Github and make changes to save to MY github
 Usually this is if you want to start from someone else's repo and do a project to save to your own repo.
 
