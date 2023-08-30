@@ -173,6 +173,14 @@ $ git init
 
 ```
 
+## Create a Repo on GitHub and start from there
+The above is a good method if you are creating a new repo from files you already have on your local machine but have not saved in git yet.  This is great if you started something, decided it would be good to add to github and go from there. Or you forgot to add your project to github, so you need to get it up there.
+
+But what if you want to create a new repo and start your project from scratch, knowing you want to have github and git and have them synced up.  In that case, before you create your files, you can start by creating a new repo on Github, and in this case you CAN let it add a readme.  
+
+Once you have your repo, you can either keep working on the browser and add files there, or clone the repo to your local folder.  Just clone as usual in your terminal and everything is ready to go, just like we did for class.  But in this case, we can push to origin and it will be updating our repo (something we didn't do on Jeffs repos).
+
+
 # Take a repo from Github and make changes to save to MY github
 Usually this is if you want to start from someone else's repo and do a project to save to your own repo.
 
