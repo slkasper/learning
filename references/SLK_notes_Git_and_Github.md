@@ -138,7 +138,7 @@ https://colab.research.google.com/drive/1-ZVvidKxe9BcXYve03STVKKsUz3XsyOr?usp=sh
 
 Brief summary:
 - Create a new repository in your Github account
-    - Be sure to create a README - it will take your message when you commit
+    - Be sure NOT to create a README - it will mess up your connecting local to remote!
 - Go back to terminal and init your repo if you haven't done it
 - Commit your changes
 
