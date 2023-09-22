@@ -109,10 +109,18 @@ You will see a list of branches, one will have a _*_ in front of it. That is you
 
 ### Create a New Branch and Change to It
 When you create a new branch, you move to it in the same step. Use the checkout command.
+
+#### Be sure you're local and remote are *synced!!!*. Before making changes, make sure your branch starts from the latest remote location by pulling from remote with `git pull origin main`
 ```bash
 git checkout -b <new_branch_name>
 ```
 At this moment, I don't know what -a and -b are all about, but these are the flags you need.  This command creates a new branch at your current point in history.  That means it has all the history up until now, but anything new will be added to the new branch, not the old.  New changes on this branch can and should be merged later after testing.
+
+Now make changes and commits.  Note, until you push, your local branch does not exist in the remote repository. To push your changes to remote, use this command:
+```bash
+git push origin <branch>
+```
+What does this mean?  `origin` is a shorthand label for the remote repository (see below on how to set that up).  So you are saying push to the repository, specifically to the given branch.  If it doesn't exist on the remote repo, like in this case where you are pushing your local branch which has changes ahead of the remote, it will create the remote branch for you, syncing them.
 
 ## Move Around Branches - back to main or to one that exists
 To change branches without createing a new one, don't use the -b flag. You do this mostly to switch back to the main because you need to be in the main to merge.  You can also use it to go from main to the new branch if you need.
@@ -125,16 +133,37 @@ to go to the last branch.  This should be good enough to get you back to main. B
 git checkout <main or other branch_name>
 ```
 
-## Once changes made and checked, Merge
+## Once changes made and checked..
 The above section shows you how to move to different branches.  Once you want to merge your changes into the current branch, make sure you are in the main branch.  Then call the merge command.
 ```bash
 git merge <new_branch_name>
+```
+
+This is not what I've done, because, usually in a corporate setting, you need a pull request before merging. So instead, I'd push changes to the remote branch. Once that is ready to merge, createa a pull request explaining the changes and add a reviewer.  
+
+Once changes are oked, I usually merge in github, not the command line.  This means essentially that I've moved the remote farther ahead then the local! so MAKE SURE YOU GO BACK TO LOCAL AND PULL THE CHANGES!!!
+
+Move back to main in your local git:
+```bash
+git checkout main
+```
+
+Then pull from remote (which is now merged and the most updated!)
+```bash
+git pull origin main
+```
+
+You can then delete your dangling branch with  (this might actually pull and prune...I'm not sure)
+```bash
+git fetch --prune
 ```
 
 # Github
 I really don't want to rewrite his lab, so I'm pasting it here:
 
 https://colab.research.google.com/drive/1-ZVvidKxe9BcXYve03STVKKsUz3XsyOr?usp=sharing
+
+Note, these instructions are starting from scratch.  Once you have a repo in both remote and local, it's super important to keep them synced before making changes!
 
 Brief summary:
 - Create a new repository in your Github account
