@@ -201,6 +201,30 @@ $ git init
  $ git push origin main
 
 ```
+## If you want to see what remote branch is synced
+
+Sometimes it might be good to check what your remote branch is synced to.  If you set it up with the `git remote add origin` line above, you should be on whatever you set it to.  But you can always start from cloning someone elses repo. In which case, you might not have set a remote origin.  Or maybe you just stepped away from a project for a long time. Whatever the reason, if you want to make sure you are pushing to the correct branch before you make any mistakes, use this command:
+```bash
+git remote show origin
+```
+It will show you all the remote branches and the local configured for pull locations.  Here's what it might look like:
+
+```bash
+(jigsaw) ➜  docs git:(issues/1-slk) git remote show origin
+* remote origin
+  Fetch URL: git@github.com:Faraday1221/parkwise.git
+  Push  URL: git@github.com:Faraday1221/parkwise.git
+  HEAD branch: main
+  Remote branches:
+    issues/1-slk   tracked
+    issues/1-slk-1 new (next fetch will store in remotes/origin)
+    main           tracked
+  Local branch configured for 'git pull':
+    main merges with remote main
+  Local refs configured for 'git push':
+    issues/1-slk pushes to issues/1-slk (fast-forwardable)
+    main         pushes to main         (up to date)
+```
 
 ## Create a Repo on GitHub and start from there
 The above is a good method if you are creating a new repo from files you already have on your local machine but have not saved in git yet.  This is great if you started something, decided it would be good to add to github and go from there. Or you forgot to add your project to github, so you need to get it up there.
