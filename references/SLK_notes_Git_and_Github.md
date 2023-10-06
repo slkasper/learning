@@ -116,6 +116,12 @@ git checkout -b <new_branch_name>
 ```
 At this moment, I don't know what -a and -b are all about, but these are the flags you need.  This command creates a new branch at your current point in history.  That means it has all the history up until now, but anything new will be added to the new branch, not the old.  New changes on this branch can and should be merged later after testing.
 
+If you want to create a new local branch that tracks the new branch on GitHub, you can use the following command. Replace <new-github-branch> with the actual name of the new branch and <new-github-branch> with said GitHub branch:
+
+```bash
+git checkout -b <new-local-branch> origin/<new-github-branch>
+```
+
 Now make changes and commits.  Note, until you push, your local branch does not exist in the remote repository. To push your changes to remote, use this command:
 ```bash
 git push origin <branch>
