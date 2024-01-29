@@ -97,19 +97,60 @@ Here are somethings you will want to know:
     ```
 ## Clean the data
 If there are nulls you must fix
-### Fix the nulls
 
+### Fix the nulls
 If there are non-numericals you must fix
+
 ### Deal with non-numericals
+I don't know how to do that yet. fill in when you do.
 
 ### Now we scale/transform the data
+Two things we want to do with the data:
+- Center
+- Scale
 
-Two things we want to do with the data: 
+Think of this as a matix in linear algebra.  We want to reduce a complex system to a unit matrix and an eigenvector.
+Similar idea.  We will reduce the data so it scales to a range of a standard deviation of 1 ( -1 to 1) and we want to center the data on 0.
 
-Looking at `df.head()`, you should be able to see if the data is scaled 
+Lucklily we can do both of these with one equation. [The StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler):
+```python
+z = (x - mu) / s
+```
+Where :
 
-Centering
-Scale = 
+**s** is the standard deviation  
+**mu** is the mean  
+**x** is your column, or feature
 
-Standardize = 
+Looking at `df.head()`, you should be able to see if the data is scaled.  Plotting it makes it even more obvious. This is a plot of a standardized, scaled dataset:
+```python
+# stand dev of mean_rad
+s = df['mean_radius'].std()
+mu = df['mean_radius'].mean()
+
+#z = (x - u) / s
+x = df['mean_radius']
+((x-mu)/s).plot(kind='hist', grid=True, title="standard scaled");
+```
+![image](https://github.com/slkasper/learning/assets/17681521/4f9e1cf9-d29c-4c57-bb2a-feea41499aca)
+
+### Taking it a step further
+This is good to get an idea what it looks like for one feature.  But will most likely want to apply this to all of our features, or columns.  Let's use python and pandas together to get some magic sauce going, shall we?
+
+Let's write a function to generalize this equation.
+```python
+def stdscale(x:pd.Series)->pd.Series:
+    '''Define Standard Deviation scaled where
+    z = (x - u) / s
+    '''
+    s = x.std()
+    mu = x.mean()
+    return (x - mu)/s
+```
+Now we can use the apply with lambda method to _apply_ this to the whole df.
+```python
+scaled_df = df.apply(lambda x: stdscale(x))
+```
+Note, you will probably have to filter the dataframe a bit. It's unlikely you will use `df.apply`. It will probably be `df[feat].apply` where `feat = df.columns[:-1]` where the last row is `target` at the very least.  You might even filter it by a lot more, but this is just an idea.  Apply the lambda to only the features, being sure to exclude your target or other prediction columns that might be in the dataframe.
+
 
