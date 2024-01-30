@@ -98,13 +98,18 @@ Here are somethings you will want to know:
 ## Clean the data
 If there are nulls you must fix
 
-### Fix the nulls
+### Impute the nulls (basically deal with the nulls)
 If there are non-numericals you must fix
 
 ### Deal with non-numericals
 I don't know how to do that yet. fill in when you do.
 
-### Now we scale/transform the data
+### Now we transform the data
+There are a few was to transform your data.  If it's symetric, you will want to Center and Scale.  If it's skewed, you will want to do a Logarithmic Transform.
+
+Note: You only want to Center and Scale Categorical non-continuous targets.  In other words, True not True. That goes for many categories as well, so Dog, Cat, Bird.  But not S, M, L.  It also doesn't make sense for values that don't fall into nice bins, like housing prices.  Centering housing prices on 0 actually loses the relevant data, so use this tool for prepping classification models.
+
+#### Symetric data transforming
 Two things we want to do with the data:
 - Center
 - Scale
@@ -134,7 +139,7 @@ x = df['mean_radius']
 ```
 ![image](https://github.com/slkasper/learning/assets/17681521/4f9e1cf9-d29c-4c57-bb2a-feea41499aca)
 
-### Taking it a step further
+##### Taking it a step further
 This is good to get an idea what it looks like for one feature.  But will most likely want to apply this to all of our features, or columns.  Let's use python and pandas together to get some magic sauce going, shall we?
 
 Let's write a function to generalize this equation.
@@ -153,4 +158,24 @@ scaled_df = df.apply(lambda x: stdscale(x))
 ```
 Note, you will probably have to filter the dataframe a bit. It's unlikely you will use `df.apply`. It will probably be `df[feat].apply` where `feat = df.columns[:-1]` where the last row is `target` at the very least.  You might even filter it by a lot more, but this is just an idea.  Apply the lambda to only the features, being sure to exclude your target or other prediction columns that might be in the dataframe.
 
+#### Skewed data transforming
+If the data is not nicely symetric (think bell curve vs an off center skewed distribution), symetry is not a good fit.  So you will want to do a logarithmic transform.  Literally, take the log of your data.
 
+(Note, the data in the symetric transform section above really looks a bit skewed so maybe log scaling would have been benfitial instead of treating it like a symetric model...)
+
+Here's what the code looks like for log scaling:
+```python
+train["SalePrice"].plot(kind="hist", bins=20, grid=True);
+```
+![image](https://github.com/slkasper/learning/assets/17681521/cacd407c-411e-44a2-8212-9e71a68a00a7)
+
+Wanna scale it?  Simple. Add `np.log(data.methods_on_data)` and Bob's your Uncle.  It looks like this:
+```python
+np.log(train["SalePrice"]).plot(kind="hist", bins=20, grid=True);
+```
+![image](https://github.com/slkasper/learning/assets/17681521/26835ca0-6d61-4720-999d-2b9e8a7dd4f6)
+
+
+
+
+Note, to make sense of the data, you will have to exponentiate your y predictions back at the end, but that's not important for right now.
