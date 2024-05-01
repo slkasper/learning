@@ -138,6 +138,39 @@ to go to the last branch.  This should be good enough to get you back to main. B
 ```bash
 git checkout <main or other branch_name>
 ```
+## Making changes _BEFORE_ creating a new branch _and BEFORE_ commiting any changes
+Specifically, this section is about making changes in your local repo before you created a new branch in either your local or your remote.
+
+This seems like a mistake, but don't worry! I've done this many times, and it's actually a short cut.  Just be sure you DON'T commit before running the following steps to create a new branch in **_BOTH_** your local and remote **_AT THE SAME TIME_**. 
+
+You can always unstage stuff if you've added files to commit (see that section).  Run those unstaging steps first, then you can still run these steps, but if you've all ready commited to your local main branch without create a new branch, this is not going to work.  You will need to rebase or push to main or fix it some how.  (This section is not dealing with fixing that problem, so for now, just be sure you didn't commit before doing these steps and it will all work out swimmingly).
+```bash
+# create a new branch as normal
+git checkout -b <new_branch_name>
+
+# check status to make sure everything is kosher.
+git status
+#You should see all the changes you've made but have not commited yet.
+
+# now, add your files. Note the -u flag will grab all updated, tracked files
+git add -u
+
+# commit
+git commit -m "your commit message here"
+
+# Now you can push to remote and build the remote branch AT THE SAME TIME with this command
+# Note the -u flag is "set upstream" this time
+git push -u origin <local_branch_name>
+```
+
+This has become my favorite way to work because I hate adding a remote branch if I'm not 100% sure I want to make changes.  This way, I can play around in my local sandbox before ever deciding to make any changes to the remote.  Then if I end up trashing the changes or making random scratch files that aren't needed in the remote repository, I never had to upload to remote at all and deal with removing things later that aren't needed.  Just one method to keep the remote cleaner than the local.  
+
+### Create new remote branch from existing local branch?
+If you've created a local branch and started making changes without creating a matching/synced remote branch, you should be able to use this method.  If you just run the last line to create an upstream branch that matches your local branch like so:
+```bash
+git push -u origin <local_branch_name>
+```
+it should work. I haven't tested this but it make sense. (come back and update this after trying it.)
 
 ## Once changes made and checked..
 The above section shows you how to move to different branches.  Once you want to merge your changes into the current branch, make sure you are in the main branch.  Then call the merge command.
